@@ -169,7 +169,7 @@ metadata:
 spec:
   containers:
   - name: nginx
-    image: nginx:1.25
+    image: nginx:1.25.3
     ports:
     - containerPort: 80
 ```
@@ -181,7 +181,7 @@ spec:
 kubectl apply -f pod.yaml
 
 # Create Pod imperatively
-kubectl run nginx --image=nginx:1.25
+kubectl run nginx --image=nginx:1.25.3
 
 # List Pods
 kubectl get pods
@@ -306,7 +306,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:1.25
+        image: nginx:1.25.3
         ports:
         - containerPort: 80
 ```
@@ -318,13 +318,13 @@ spec:
 kubectl apply -f deployment.yaml
 
 # Create imperatively
-kubectl create deployment nginx --image=nginx:1.25
+kubectl create deployment nginx --image=nginx:1.25.3
 
 # Create with replicas
-kubectl create deployment nginx --image=nginx:1.25 --replicas=3
+kubectl create deployment nginx --image=nginx:1.25.3 --replicas=3
 
 # Create and expose in one command
-kubectl create deployment nginx --image=nginx:1.25
+kubectl create deployment nginx --image=nginx:1.25.3
 kubectl expose deployment nginx --port=80 --type=LoadBalancer
 ```
 
@@ -1058,7 +1058,7 @@ spec:
     spec:
       containers:
       - name: webapp
-        image: nginx:1.25
+        image: nginx:1.25.3
 ```
 
 2. **Use Namespaces for Organization**
