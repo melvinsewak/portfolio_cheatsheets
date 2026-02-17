@@ -32,12 +32,12 @@ REM List files and directories
 dir
 
 REM List with details
-dir /w      # Wide format
-dir /p      # Pause after each screen
-dir /s      # Include subdirectories
-dir /a      # Show hidden files
-dir /od     # Order by date
-dir /on     # Order by name
+dir /w      & REM Wide format
+dir /p      & REM Pause after each screen
+dir /s      & REM Include subdirectories
+dir /a      & REM Show hidden files
+dir /od     & REM Order by date
+dir /on     & REM Order by name
 
 REM List specific file types
 dir *.txt
@@ -287,8 +287,8 @@ REM Path with spaces (use quotes)
 cd "C:\Program Files"
 
 REM Short names for paths with spaces
-dir /x    # Shows short names
-cd PROGRA~1   # Short name for Program Files
+dir /x    & REM Shows short names
+cd PROGRA~1   & REM Short name for Program Files
 ```
 
 ## Command Line Basics
@@ -344,17 +344,17 @@ echo.
 ### Using Wildcards
 ```cmd
 REM * matches any characters
-dir *.txt        # All .txt files
-dir file*.*      # Files starting with "file"
-dir *report*     # Files containing "report"
+dir *.txt        & REM All .txt files
+dir file*.*      & REM Files starting with "file"
+dir *report*     & REM Files containing "report"
 
 REM ? matches single character
-dir file?.txt    # file1.txt, fileA.txt, etc.
-dir test??.log   # test01.log, testAB.log, etc.
+dir file?.txt    & REM file1.txt, fileA.txt, etc.
+dir test??.log   & REM test01.log, testAB.log, etc.
 
 REM Combining wildcards
-dir *.* /s       # All files in all subdirectories
-del temp*.tmp    # Delete temp files
+dir *.* /s       & REM All files in all subdirectories
+del temp*.tmp    & REM Delete temp files
 ```
 
 ## Environment Variables
@@ -362,20 +362,20 @@ del temp*.tmp    # Delete temp files
 ### Common Variables
 ```cmd
 REM User and system info
-echo %username%        # Current user
-echo %computername%    # Computer name
-echo %userdomain%      # Domain name
+echo %username%        & REM Current user
+echo %computername%    & REM Computer name
+echo %userdomain%      & REM Domain name
 
 REM Paths
-echo %cd%             # Current directory
-echo %path%           # System PATH
-echo %homepath%       # User home directory
-echo %temp%           # Temp folder
-echo %windir%         # Windows directory
-echo %programfiles%   # Program Files directory
+echo %cd%             & REM Current directory
+echo %path%           & REM System PATH
+echo %homepath%       & REM User home directory
+echo %temp%           & REM Temp folder
+echo %windir%         & REM Windows directory
+echo %programfiles%   & REM Program Files directory
 
 REM System
-echo %os%             # Operating system
+echo %os%             & REM Operating system
 echo %processor_architecture%
 echo %number_of_processors%
 ```
@@ -453,10 +453,10 @@ copy *.txt backup\
 ❌ **Don't use del *.* without caution**
 ```cmd
 REM Dangerous - deletes all files
-del *.*    # Better: del /p *.*
+del *.*    & REM Better: del /p *.*
 
 REM Very dangerous with /s
-del /s *.*   # Deletes in subdirectories too!
+del /s *.*   & REM Deletes in subdirectories too!
 ```
 
 ❌ **Don't forget drive letter when changing drives**
@@ -474,11 +474,11 @@ cd \Projects
 ❌ **Don't ignore path spaces**
 ```cmd
 REM Wrong
-cd C:\Program Files    # Fails
+cd C:\Program Files    & REM Fails
 
 REM Correct
 cd "C:\Program Files"
-cd C:\Progra~1         # Short name alternative
+cd C:\Progra~1         & REM Short name alternative
 ```
 
 ❌ **Don't use move for backup (use copy)**
@@ -493,9 +493,9 @@ copy important.txt backup\
 ❌ **Don't assume case sensitivity**
 ```cmd
 REM CMD is case-insensitive
-CD C:\Users           # Same as
-cd c:\users           # Same as
-Cd C:\USERS           # Same
+CD C:\Users           & REM Same as
+cd c:\users           & REM Same as
+Cd C:\USERS           & REM Same
 
 REM But filenames preserve case when created
 ```
@@ -514,18 +514,18 @@ REM Note: Some commands accept forward slashes
 ❌ **Don't delete system directories**
 ```cmd
 REM Never delete these
-rmdir C:\Windows      # DON'T!
-del C:\System32\*.*   # DON'T!
+rmdir C:\Windows      & REM DON'T!
+del C:\System32\*.*   & REM DON'T!
 
 REM Be very careful with:
-rmdir %systemroot%    # DON'T!
-del %windir%\*.*      # DON'T!
+rmdir %systemroot%    & REM DON'T!
+del %windir%\*.*      & REM DON'T!
 ```
 
 ❌ **Don't forget file extensions**
 ```cmd
 REM Unclear
-ren report report_old    # What file type?
+ren report report_old    & REM What file type?
 
 REM Better - explicit
 ren report.txt report_old.txt
@@ -535,37 +535,37 @@ ren report.txt report_old.txt
 
 ### Essential Commands
 ```cmd
-dir              # List directory contents
-cd               # Change directory
-mkdir            # Create directory
-rmdir            # Remove directory
-copy             # Copy files
-move             # Move files
-del              # Delete files
-ren              # Rename files
-type             # Display file contents
-cls              # Clear screen
-exit             # Exit CMD
-help             # Get help
+dir              & REM List directory contents
+cd               & REM Change directory
+mkdir            & REM Create directory
+rmdir            & REM Remove directory
+copy             & REM Copy files
+move             & REM Move files
+del              & REM Delete files
+ren              & REM Rename files
+type             & REM Display file contents
+cls              & REM Clear screen
+exit             & REM Exit CMD
+help             & REM Get help
 ```
 
 ### Common Switches
 ```cmd
-/s      # Include subdirectories
-/p      # Prompt for confirmation
-/q      # Quiet mode
-/a      # Include hidden files
-/f      # Force operation
-/y      # Yes to all prompts
-/-y     # Prompt for confirmation
-/?      # Display help
+/s      & REM Include subdirectories
+/p      & REM Prompt for confirmation
+/q      & REM Quiet mode
+/a      & REM Include hidden files
+/f      & REM Force operation
+/y      & REM Yes to all prompts
+/-y     & REM Prompt for confirmation
+/?      & REM Display help
 ```
 
 ### Navigation Shortcuts
 ```cmd
-.       # Current directory
-..      # Parent directory
-\       # Root directory
-~       # User home (in variables)
-%cd%    # Current directory path
+.       & REM Current directory
+..      & REM Parent directory
+\       & REM Root directory
+~       & REM User home (in variables)
+%cd%    & REM Current directory path
 ```

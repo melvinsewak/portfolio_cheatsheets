@@ -429,9 +429,9 @@ REM Create new service
 sc create MyService binPath= "C:\Program Files\MyApp\service.exe" start= auto
 
 REM Change service startup type
-sc config wuauserv start= auto      # Automatic
-sc config wuauserv start= demand    # Manual
-sc config wuauserv start= disabled  # Disabled
+sc config wuauserv start= auto      & REM Automatic
+sc config wuauserv start= demand    & REM Manual
+sc config wuauserv start= disabled  & REM Disabled
 
 REM Change service account
 sc config MyService obj= "NT AUTHORITY\LocalService" password= ""
@@ -466,25 +466,25 @@ REM Launch diskpart (requires admin)
 diskpart
 
 REM Within diskpart:
-list disk              # List all disks
-list volume            # List all volumes
-list partition         # List partitions on selected disk
+list disk              & REM List all disks
+list volume            & REM List all volumes
+list partition         & REM List partitions on selected disk
 
-select disk 1          # Select disk by number
-select volume C        # Select volume by letter
+select disk 1          & REM Select disk by number
+select volume C        & REM Select volume by letter
 
-detail disk            # Show disk details
-detail volume          # Show volume details
+detail disk            & REM Show disk details
+detail volume          & REM Show volume details
 
-clean                  # Clean disk (removes all data)
+clean                  & REM Clean disk (removes all data)
 create partition primary size=10000
 format fs=ntfs quick label="Data"
 assign letter=E
 
-extend size=5000       # Extend volume
-shrink desired=5000    # Shrink volume
+extend size=5000       & REM Extend volume
+shrink desired=5000    & REM Shrink volume
 
-active                 # Mark partition as active
+active                 & REM Mark partition as active
 ```
 
 ### Disk Utilities
@@ -620,7 +620,7 @@ pathping google.com
 
 REM NBT statistics
 nbtstat -a computername
-nbtstat -c    # Cache contents
+nbtstat -c    & REM Cache contents
 
 REM Network packet capture
 netsh trace start capture=yes tracefile=C:\capture.etl
@@ -946,9 +946,9 @@ if %DRYRUN%==1 (
 ❌ **Don't modify system services without understanding**
 ```cmd
 REM DANGEROUS - Don't disable critical services
-sc config wuauserv start= disabled     # Windows Update (can cause issues)
-sc config cryptsvc start= disabled     # Cryptographic Services (breaks system)
-sc config wscsvc start= disabled       # Security Center (security risk)
+sc config wuauserv start= disabled     & REM Windows Update (can cause issues)
+sc config cryptsvc start= disabled     & REM Cryptographic Services (breaks system)
+sc config wscsvc start= disabled       & REM Security Center (security risk)
 ```
 
 ❌ **Don't edit registry without backup**

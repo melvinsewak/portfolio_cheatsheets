@@ -269,7 +269,7 @@ hostname
 
 REM Query DNS
 nslookup google.com
-nslookup google.com 8.8.8.8    # Use specific DNS server
+nslookup google.com 8.8.8.8    & REM Use specific DNS server
 
 REM Get network path info
 pathping google.com
@@ -457,15 +457,15 @@ echo %path%
 
 REM String manipulation
 set str=Hello World
-echo %str%                    # Hello World
-echo %str:~0,5%              # Hello (substring)
-echo %str:~-5%               # World (last 5 chars)
-echo %str:Hello=Hi%          # Hi World (replace)
+echo %str%                    & REM Hello World
+echo %str:~0,5%              & REM Hello (substring)
+echo %str:~-5%               & REM World (last 5 chars)
+echo %str:Hello=Hi%          & REM Hi World (replace)
 
 REM Path manipulation
 set filepath=C:\Users\Docs\file.txt
-echo %filepath:~0,2%         # C: (drive)
-echo %filepath:~3%           # Users\Docs\file.txt
+echo %filepath:~0,2%         & REM C: (drive)
+echo %filepath:~3%           & REM Users\Docs\file.txt
 
 REM Remove quotes
 set "quoted=This has quotes"
@@ -475,35 +475,35 @@ REM Array-like behavior
 set arr[0]=First
 set arr[1]=Second
 set arr[2]=Third
-echo %arr[1]%                # Second
+echo %arr[1]%                & REM Second
 ```
 
 ### Common Environment Variables
 ```cmd
 REM System paths
-%SYSTEMROOT%         # C:\Windows
-%SYSTEMDRIVE%        # C:
-%PROGRAMFILES%       # C:\Program Files
-%PROGRAMFILES(X86)%  # C:\Program Files (x86)
-%WINDIR%             # C:\Windows
+%SYSTEMROOT%         & REM C:\Windows
+%SYSTEMDRIVE%        & REM C:
+%PROGRAMFILES%       & REM C:\Program Files
+%PROGRAMFILES(X86)%  & REM C:\Program Files (x86)
+%WINDIR%             & REM C:\Windows
 
 REM User paths
-%USERPROFILE%        # C:\Users\Username
-%APPDATA%            # Application Data
-%LOCALAPPDATA%       # Local Application Data
-%TEMP% or %TMP%      # Temp directory
-%HOMEPATH%           # \Users\Username
+%USERPROFILE%        & REM C:\Users\Username
+%APPDATA%            & REM Application Data
+%LOCALAPPDATA%       & REM Local Application Data
+%TEMP% or %TMP%      & REM Temp directory
+%HOMEPATH%           & REM \Users\Username
 
 REM Session info
-%USERNAME%           # Current username
-%COMPUTERNAME%       # Computer name
-%USERDOMAIN%         # Domain name
-%DATE%               # Current date
-%TIME%               # Current time
-%RANDOM%             # Random number
-%CD%                 # Current directory
-%CMDCMDLINE%         # Command line
-%ERRORLEVEL%         # Last error code
+%USERNAME%           & REM Current username
+%COMPUTERNAME%       & REM Computer name
+%USERDOMAIN%         & REM Domain name
+%DATE%               & REM Current date
+%TIME%               & REM Current time
+%RANDOM%             & REM Random number
+%CD%                 & REM Current directory
+%CMDCMDLINE%         & REM Command line
+%ERRORLEVEL%         & REM Last error code
 ```
 
 ## Redirection and Pipes
@@ -792,7 +792,7 @@ REM Wrong - counter won't increment properly
 set count=0
 for %%f in (*.txt) do (
     set /a count+=1
-    echo %count%    # Always shows 0
+    echo %count%    & REM Always shows 0
 )
 
 REM Correct
@@ -800,16 +800,16 @@ setlocal enabledelayedexpansion
 set count=0
 for %%f in (*.txt) do (
     set /a count+=1
-    echo !count!    # Shows incremented value
+    echo !count!    & REM Shows incremented value
 )
 ```
 
 ❌ **Don't kill critical system processes**
 ```cmd
 REM DON'T DO THIS
-taskkill /f /im explorer.exe    # Kills Windows Explorer
-taskkill /f /im csrss.exe       # Kills critical system process
-taskkill /f /im winlogon.exe    # Kills logon process
+taskkill /f /im explorer.exe    & REM Kills Windows Explorer
+taskkill /f /im csrss.exe       & REM Kills critical system process
+taskkill /f /im winlogon.exe    & REM Kills logon process
 ```
 
 ❌ **Don't perform network operations without error checking**
@@ -873,26 +873,26 @@ exit /b 0
 
 ### Network Quick Commands
 ```cmd
-ipconfig /all              # Full network config
-ipconfig /flushdns         # Clear DNS cache
-netstat -an                # All connections
-ping -t hostname           # Continuous ping
-tracert hostname           # Trace route
-nslookup hostname          # DNS lookup
+ipconfig /all              & REM Full network config
+ipconfig /flushdns         & REM Clear DNS cache
+netstat -an                & REM All connections
+ping -t hostname           & REM Continuous ping
+tracert hostname           & REM Trace route
+nslookup hostname          & REM DNS lookup
 ```
 
 ### Process Quick Commands
 ```cmd
-tasklist                   # List processes
-tasklist /v                # Verbose process list
-taskkill /f /im name.exe   # Force kill process
-taskkill /pid 1234 /f      # Kill by PID
+tasklist                   & REM List processes
+tasklist /v                & REM Verbose process list
+taskkill /f /im name.exe   & REM Force kill process
+taskkill /pid 1234 /f      & REM Kill by PID
 ```
 
 ### Search Quick Commands
 ```cmd
-find "text" file.txt       # Find text in file
-findstr /s /i "text" *.*   # Recursive case-insensitive
-where filename.exe         # Find executable
-dir /s filename.txt        # Find file recursively
+find "text" file.txt       & REM Find text in file
+findstr /s /i "text" *.*   & REM Recursive case-insensitive
+where filename.exe         & REM Find executable
+dir /s filename.txt        & REM Find file recursively
 ```
