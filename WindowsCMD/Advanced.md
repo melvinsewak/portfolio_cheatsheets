@@ -365,6 +365,7 @@ reg delete HKCU\Software\MyApp /va /f
 ### Registry Best Practices
 ```cmd
 REM Always backup before modifying
+REM Note: Date format is locale-dependent (US format assumed)
 reg export HKCU\Software\MyApp backup_%date:~-4%%date:~-10,2%%date:~-7,2%.reg
 
 REM Check if key exists before modifying
@@ -778,6 +779,7 @@ netsh interface set interface "Ethernet" enabled
 setlocal enabledelayedexpansion
 
 REM Create diagnostic report
+REM Note: Date format is locale-dependent (US format assumed)
 set REPORTFILE=diagnostic_%computername%_%date:~-4%%date:~-10,2%%date:~-7,2%.txt
 
 echo ========================================>> %REPORTFILE%
@@ -825,6 +827,7 @@ endlocal
 @echo off
 REM Backup before modification
 set BACKUPKEY=HKCU\Software\MyApp
+REM Note: Date format is locale-dependent (US format assumed)
 set BACKUPFILE=registry_backup_%date:~-4%%date:~-10,2%%date:~-7,2%.reg
 reg export %BACKUPKEY% %BACKUPFILE%
 echo Backup created: %BACKUPFILE%
@@ -906,6 +909,7 @@ REM myvar no longer exists outside this scope
 ✅ **Implement logging for important operations**
 ```cmd
 @echo off
+REM Note: Date format is locale-dependent (US format assumed)
 set LOGFILE=operations_%date:~-4%%date:~-10,2%%date:~-7,2%.log
 
 call :log "INFO" "Script started"
@@ -1079,6 +1083,7 @@ REM ================================================
 REM Script Configuration
 REM ================================================
 set VERSION=1.0
+REM Note: Date format is locale-dependent (US format assumed)
 set LOGFILE=script_%date:~-4%%date:~-10,2%%date:~-7,2%.log
 set ERRORLEVEL_SUCCESS=0
 set ERRORLEVEL_ERROR=1

@@ -386,7 +386,7 @@ REM Navigate using variables
 cd %userprofile%\Documents
 cd %temp%
 
-REM Create backup with date
+REM Create backup with date (Note: Date format is locale-dependent, US format assumed)
 copy file.txt backup_%date:~-4,4%%date:~-10,2%%date:~-7,2%.txt
 ```
 
