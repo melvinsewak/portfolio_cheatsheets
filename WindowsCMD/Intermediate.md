@@ -158,99 +158,99 @@ echo Script finished
 
 ### Network Testing
 ```cmd
-# Ping host
+REM Ping host
 ping google.com
 
-# Ping with specific count
+REM Ping with specific count
 ping -n 10 google.com
 
-# Continuous ping
+REM Continuous ping
 ping -t google.com
 
-# Ping with timeout
+REM Ping with timeout
 ping -w 5000 google.com
 
-# Ping specific packet size
+REM Ping specific packet size
 ping -l 1000 google.com
 
-# Trace route to host
+REM Trace route to host
 tracert google.com
 
-# Test if port is open (via telnet)
+REM Test if port is open (via telnet)
 telnet example.com 80
 ```
 
 ### IP Configuration
 ```cmd
-# Display network configuration
+REM Display network configuration
 ipconfig
 
-# Display detailed configuration
+REM Display detailed configuration
 ipconfig /all
 
-# Display DNS cache
+REM Display DNS cache
 ipconfig /displaydns
 
-# Flush DNS cache
+REM Flush DNS cache
 ipconfig /flushdns
 
-# Release IP address
+REM Release IP address
 ipconfig /release
 
-# Renew IP address
+REM Renew IP address
 ipconfig /renew
 
-# Display specific adapter
+REM Display specific adapter
 ipconfig /all | findstr /i "IPv4 DNS"
 ```
 
 ### Network Statistics
 ```cmd
-# Display active connections
+REM Display active connections
 netstat
 
-# Display with addresses and port numbers
+REM Display with addresses and port numbers
 netstat -n
 
-# Display all connections and listening ports
+REM Display all connections and listening ports
 netstat -a
 
-# Display with executable names
+REM Display with executable names
 netstat -b
 
-# Display routing table
+REM Display routing table
 netstat -r
 
-# Display statistics
+REM Display statistics
 netstat -e
 netstat -s
 
-# Continuous display with interval
+REM Continuous display with interval
 netstat -a 5
 
-# Find specific connection
+REM Find specific connection
 netstat -an | findstr :80
 netstat -an | findstr ESTABLISHED
 ```
 
 ### Network Share Commands
 ```cmd
-# Display shared resources
+REM Display shared resources
 net share
 
-# Map network drive
+REM Map network drive
 net use Z: \\server\share
 
-# Map with credentials
+REM Map with credentials
 net use Z: \\server\share /user:domain\username password
 
-# Delete mapped drive
+REM Delete mapped drive
 net use Z: /delete
 
-# View all network connections
+REM View all network connections
 net use
 
-# Access network share directly
+REM Access network share directly
 pushd \\server\share
 REM Do work
 popd
@@ -258,20 +258,20 @@ popd
 
 ### ARP and Network Info
 ```cmd
-# Display ARP cache
+REM Display ARP cache
 arp -a
 
-# Display specific interface ARP
+REM Display specific interface ARP
 arp -a -N 192.168.1.1
 
-# Display hostname
+REM Display hostname
 hostname
 
-# Query DNS
+REM Query DNS
 nslookup google.com
 nslookup google.com 8.8.8.8    # Use specific DNS server
 
-# Get network path info
+REM Get network path info
 pathping google.com
 ```
 
@@ -279,73 +279,73 @@ pathping google.com
 
 ### List Processes
 ```cmd
-# List all running processes
+REM List all running processes
 tasklist
 
-# List with detailed info
+REM List with detailed info
 tasklist /v
 
-# List specific process
+REM List specific process
 tasklist | findstr explorer.exe
 
-# List by memory usage
+REM List by memory usage
 tasklist /fo table /fi "memusage gt 100000"
 
-# List processes by user
+REM List processes by user
 tasklist /fi "username eq %username%"
 
-# List processes with services
+REM List processes with services
 tasklist /svc
 
-# List by status
+REM List by status
 tasklist /fi "status eq running"
 ```
 
 ### Kill Processes
 ```cmd
-# Kill process by name
+REM Kill process by name
 taskkill /im notepad.exe
 
-# Kill process by PID
+REM Kill process by PID
 taskkill /pid 1234
 
-# Force kill process
+REM Force kill process
 taskkill /f /im chrome.exe
 
-# Kill process tree
+REM Kill process tree
 taskkill /f /t /im process.exe
 
-# Kill multiple processes
+REM Kill multiple processes
 taskkill /f /im app1.exe /im app2.exe
 
-# Kill with filter
+REM Kill with filter
 taskkill /fi "status eq not responding" /f
 
-# Kill remote process
+REM Kill remote process
 taskkill /s computername /u username /p password /im notepad.exe
 ```
 
 ### System Commands
 ```cmd
-# Shutdown computer
+REM Shutdown computer
 shutdown /s
 
-# Shutdown with timer (seconds)
+REM Shutdown with timer (seconds)
 shutdown /s /t 60
 
-# Restart computer
+REM Restart computer
 shutdown /r /t 0
 
-# Log off current user
+REM Log off current user
 shutdown /l
 
-# Hibernate
+REM Hibernate
 shutdown /h
 
-# Cancel scheduled shutdown
+REM Cancel scheduled shutdown
 shutdown /a
 
-# Display shutdown GUI
+REM Display shutdown GUI
 shutdown /i
 ```
 
@@ -353,76 +353,76 @@ shutdown /i
 
 ### Find Command
 ```cmd
-# Search for text in file
+REM Search for text in file
 find "search text" filename.txt
 
-# Case-insensitive search
+REM Case-insensitive search
 find /i "search text" filename.txt
 
-# Display line numbers
+REM Display line numbers
 find /n "error" logfile.txt
 
-# Count occurrences
+REM Count occurrences
 find /c "error" logfile.txt
 
-# Display lines that don't match
+REM Display lines that don't match
 find /v "success" logfile.txt
 
-# Search multiple files
+REM Search multiple files
 find "TODO" *.txt
 
-# Search with pipe
+REM Search with pipe
 dir /b | find "report"
 ```
 
 ### Findstr Command (Advanced)
 ```cmd
-# Basic search
+REM Basic search
 findstr "pattern" filename.txt
 
-# Case-insensitive search
+REM Case-insensitive search
 findstr /i "pattern" filename.txt
 
-# Search multiple files
+REM Search multiple files
 findstr "error" *.log
 
-# Regular expression search
+REM Regular expression search
 findstr /r "^Error.*" logfile.txt
 
-# Search recursively in subdirectories
+REM Search recursively in subdirectories
 findstr /s "TODO" *.cs
 
-# Display line numbers
+REM Display line numbers
 findstr /n "pattern" file.txt
 
-# Multiple search patterns
+REM Multiple search patterns
 findstr /c:"error" /c:"warning" logfile.txt
 
-# Search from file list
+REM Search from file list
 findstr /g:searchlist.txt *.txt
 
-# Exact match only
+REM Exact match only
 findstr /x "exact line" file.txt
 
-# Search with wildcards
+REM Search with wildcards
 findstr /l "file.*txt" directory_list.txt
 ```
 
 ### Where Command
 ```cmd
-# Find executable in PATH
+REM Find executable in PATH
 where notepad.exe
 
-# Find multiple files
+REM Find multiple files
 where *.dll
 
-# Search in specific directory
+REM Search in specific directory
 where /r C:\Windows *.exe
 
-# Search with multiple patterns
+REM Search with multiple patterns
 where $PATH:*.exe
 
-# Quiet mode (just return code)
+REM Quiet mode (just return code)
 where /q cmd.exe
 ```
 
@@ -430,23 +430,23 @@ where /q cmd.exe
 
 ### Setting Variables
 ```cmd
-# Set temporary variable (session only)
+REM Set temporary variable (session only)
 set myvar=value
 set path=%path%;C:\NewPath
 
-# Set permanent user variable
+REM Set permanent user variable
 setx myvar "value"
 
-# Set permanent system variable (requires admin)
+REM Set permanent system variable (requires admin)
 setx myvar "value" /m
 
-# Remove variable
+REM Remove variable
 set myvar=
 
-# Display all variables
+REM Display all variables
 set
 
-# Display specific variable
+REM Display specific variable
 set path
 echo %path%
 ```
@@ -480,21 +480,21 @@ echo %arr[1]%                # Second
 
 ### Common Environment Variables
 ```cmd
-# System paths
+REM System paths
 %SYSTEMROOT%         # C:\Windows
 %SYSTEMDRIVE%        # C:
 %PROGRAMFILES%       # C:\Program Files
 %PROGRAMFILES(X86)%  # C:\Program Files (x86)
 %WINDIR%             # C:\Windows
 
-# User paths
+REM User paths
 %USERPROFILE%        # C:\Users\Username
 %APPDATA%            # Application Data
 %LOCALAPPDATA%       # Local Application Data
 %TEMP% or %TMP%      # Temp directory
 %HOMEPATH%           # \Users\Username
 
-# Session info
+REM Session info
 %USERNAME%           # Current username
 %COMPUTERNAME%       # Computer name
 %USERDOMAIN%         # Domain name
@@ -510,54 +510,54 @@ echo %arr[1]%                # Second
 
 ### Output Redirection
 ```cmd
-# Redirect output to file (overwrite)
+REM Redirect output to file (overwrite)
 dir > output.txt
 
-# Append to file
+REM Append to file
 dir >> output.txt
 
-# Redirect stderr to file
+REM Redirect stderr to file
 dir nonexistent 2> error.txt
 
-# Redirect both stdout and stderr
+REM Redirect both stdout and stderr
 dir > output.txt 2>&1
 
-# Redirect to NUL (discard output)
+REM Redirect to NUL (discard output)
 dir > nul
 
-# Redirect stderr to NUL
+REM Redirect stderr to NUL
 dir 2> nul
 
-# Redirect both to NUL
+REM Redirect both to NUL
 dir > nul 2>&1
 ```
 
 ### Input Redirection
 ```cmd
-# Read input from file
+REM Read input from file
 sort < input.txt
 
-# Combine input and output redirection
+REM Combine input and output redirection
 sort < unsorted.txt > sorted.txt
 
-# Use file as command input
+REM Use file as command input
 findstr "pattern" < input.txt
 ```
 
 ### Pipes
 ```cmd
-# Pipe output to another command
+REM Pipe output to another command
 dir | more
 dir | find "txt"
 dir | sort
 
-# Multiple pipes
+REM Multiple pipes
 dir /s | findstr /i "log" | more
 
-# Combine with redirection
+REM Combine with redirection
 dir | find "txt" > textfiles.txt
 
-# Process and filter
+REM Process and filter
 systeminfo | findstr /i "total physical memory"
 netstat -an | findstr "ESTABLISHED"
 tasklist | findstr /i "chrome"
@@ -565,17 +565,17 @@ tasklist | findstr /i "chrome"
 
 ### Advanced Redirection
 ```cmd
-# Tee-like behavior (display and save)
+REM Tee-like behavior (display and save)
 dir | find "txt" | (echo. && type con && echo.) > output.txt
 
-# Multiple commands with redirection
+REM Multiple commands with redirection
 (echo Line 1 && echo Line 2 && echo Line 3) > output.txt
 
-# Append multiple command outputs
+REM Append multiple command outputs
 echo First >> log.txt
 echo Second >> log.txt
 
-# Conditional execution with pipes
+REM Conditional execution with pipes
 dir | findstr "file.txt" && echo Found || echo Not found
 ```
 
@@ -583,43 +583,43 @@ dir | findstr "file.txt" && echo Found || echo Not found
 
 ### Sequential Execution
 ```cmd
-# Run commands in sequence (always)
+REM Run commands in sequence (always)
 command1 & command2 & command3
 
-# Example
+REM Example
 cd C:\Projects & dir & echo Done
 
-# Each runs regardless of success
+REM Each runs regardless of success
 mkdir newfolder & cd newfolder & echo Created and moved
 ```
 
 ### Conditional Execution
 ```cmd
-# Run second only if first succeeds
+REM Run second only if first succeeds
 command1 && command2
 
-# Example - create and enter directory
+REM Example - create and enter directory
 mkdir newfolder && cd newfolder
 
-# Run second only if first fails
+REM Run second only if first fails
 command1 || command2
 
-# Example - create if not exists
+REM Example - create if not exists
 exist file.txt || echo File not found
 
-# Combine conditional operators
+REM Combine conditional operators
 mkdir backup && copy *.txt backup\ || echo Failed to backup
 ```
 
 ### Grouping Commands
 ```cmd
-# Group with parentheses
+REM Group with parentheses
 (command1 & command2 & command3)
 
-# Conditional groups
+REM Conditional groups
 (mkdir logs && cd logs && echo Log directory ready) || echo Setup failed
 
-# Redirect grouped output
+REM Redirect grouped output
 (echo Line 1 && echo Line 2 && echo Line 3) > output.txt
 ```
 
@@ -627,46 +627,46 @@ mkdir backup && copy *.txt backup\ || echo Failed to backup
 
 ### View and Modify Attributes
 ```cmd
-# Display file attributes
+REM Display file attributes
 attrib filename.txt
 
-# Set read-only
+REM Set read-only
 attrib +r filename.txt
 
-# Remove read-only
+REM Remove read-only
 attrib -r filename.txt
 
-# Set hidden
+REM Set hidden
 attrib +h filename.txt
 
-# Set system file
+REM Set system file
 attrib +s filename.txt
 
-# Set archive attribute
+REM Set archive attribute
 attrib +a filename.txt
 
-# Combine attributes
+REM Combine attributes
 attrib +r +h filename.txt
 
-# Apply to directory and contents
+REM Apply to directory and contents
 attrib +r /s /d C:\ImportantFolder\*.*
 ```
 
 ### File Comparison
 ```cmd
-# Compare two files
+REM Compare two files
 fc file1.txt file2.txt
 
-# Binary comparison
+REM Binary comparison
 fc /b file1.exe file2.exe
 
-# Case-insensitive comparison
+REM Case-insensitive comparison
 fc /c file1.txt file2.txt
 
-# Show only line count differences
+REM Show only line count differences
 fc /n file1.txt file2.txt
 
-# Compare with specific tab size
+REM Compare with specific tab size
 fc /t file1.txt file2.txt
 ```
 
@@ -681,10 +681,10 @@ echo Starting process...
 
 ✅ **Quote variables in conditionals**
 ```cmd
-# Good - prevents errors with empty variables
+REM Good - prevents errors with empty variables
 if "%username%"=="admin" echo Admin user
 
-# Bad - fails if variable is empty
+REM Bad - fails if variable is empty
 if %username%==admin echo Admin user
 ```
 
@@ -713,10 +713,10 @@ for %%f in (*.txt) do (
 
 ✅ **Use CALL for nested batch files**
 ```cmd
-# Good - returns after completion
+REM Good - returns after completion
 call other_script.bat
 
-# Bad - transfers control, doesn't return
+REM Bad - transfers control, doesn't return
 other_script.bat
 ```
 
@@ -733,7 +733,7 @@ echo Starting backup...
 
 ✅ **Use /? for command help**
 ```cmd
-# Always check available options
+REM Always check available options
 findstr /?
 for /?
 if /?
@@ -743,12 +743,12 @@ if /?
 
 ❌ **Don't forget @echo off in batch files**
 ```cmd
-# Without @echo off - messy output showing all commands
+REM Without @echo off - messy output showing all commands
 echo Starting...
 dir
 copy file.txt backup\
 
-# With @echo off - clean output
+REM With @echo off - clean output
 @echo off
 echo Starting...
 dir
@@ -757,45 +757,45 @@ copy file.txt backup\
 
 ❌ **Don't use single % in batch files for variables**
 ```cmd
-# Wrong in .bat file
+REM Wrong in .bat file
 for %f in (*.txt) do echo %f
 
-# Correct in .bat file
+REM Correct in .bat file
 for %%f in (*.txt) do echo %%f
 
-# Note: Single % works in command line
+REM Note: Single % works in command line
 for %f in (*.txt) do echo %f
 ```
 
 ❌ **Don't forget to handle spaces in paths**
 ```cmd
-# Wrong
+REM Wrong
 if exist C:\Program Files\app echo Found
 
-# Correct
+REM Correct
 if exist "C:\Program Files\app" echo Found
 ```
 
 ❌ **Don't use outdated network commands**
 ```cmd
-# Deprecated
+REM Deprecated
 nbtstat
 
-# Better alternatives
+REM Better alternatives
 Get-NetTCPConnection (PowerShell)
 netstat -an
 ```
 
 ❌ **Don't forget to enable delayed expansion when needed**
 ```cmd
-# Wrong - counter won't increment properly
+REM Wrong - counter won't increment properly
 set count=0
 for %%f in (*.txt) do (
     set /a count+=1
     echo %count%    # Always shows 0
 )
 
-# Correct
+REM Correct
 setlocal enabledelayedexpansion
 set count=0
 for %%f in (*.txt) do (
@@ -806,7 +806,7 @@ for %%f in (*.txt) do (
 
 ❌ **Don't kill critical system processes**
 ```cmd
-# DON'T DO THIS
+REM DON'T DO THIS
 taskkill /f /im explorer.exe    # Kills Windows Explorer
 taskkill /f /im csrss.exe       # Kills critical system process
 taskkill /f /im winlogon.exe    # Kills logon process
@@ -814,11 +814,11 @@ taskkill /f /im winlogon.exe    # Kills logon process
 
 ❌ **Don't perform network operations without error checking**
 ```cmd
-# Wrong
+REM Wrong
 net use Z: \\server\share
 copy *.txt Z:\
 
-# Correct
+REM Correct
 net use Z: \\server\share
 if %errorlevel% EQU 0 (
     copy *.txt Z:\
@@ -829,7 +829,7 @@ if %errorlevel% EQU 0 (
 
 ❌ **Don't use GOTO excessively**
 ```cmd
-# Bad - spaghetti code
+REM Bad - spaghetti code
 :start
 echo Enter choice
 goto process
@@ -840,7 +840,7 @@ goto validate
 :validate
 goto end
 
-# Better - use CALL for structure
+REM Better - use CALL for structure
 call :getInput
 call :process
 call :validate
