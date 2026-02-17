@@ -4,8 +4,8 @@
 
 ### Creating Batch Files
 ```cmd
-# Create a simple batch file
-# Save as script.bat
+REM Create a simple batch file
+REM Save as script.bat
 
 @echo off
 echo This is a batch script
@@ -91,15 +91,15 @@ if %num% EQU 10 (
 
 ### Comparison Operators
 ```cmd
-# Numeric comparisons
-EQU    # Equal to
-NEQ    # Not equal to
-LSS    # Less than
-LEQ    # Less than or equal to
-GTR    # Greater than
-GEQ    # Greater than or equal to
+REM Numeric comparisons
+REM EQU - Equal to
+REM NEQ - Not equal to
+REM LSS - Less than
+REM LEQ - Less than or equal to
+REM GTR - Greater than
+REM GEQ - Greater than or equal to
 
-# Example
+REM Example
 if %value% GEQ 100 echo Value is 100 or more
 ```
 

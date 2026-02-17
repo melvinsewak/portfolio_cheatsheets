@@ -9,27 +9,27 @@ setlocal enabledelayedexpansion
 
 REM Substring extraction
 set str=HelloWorld
-set sub=!str:~0,5!              # Hello
-set sub=!str:~-5!               # World
-set sub=!str:~5,5!              # World
+set sub=!str:~0,5!              & REM Hello
+set sub=!str:~-5!               & REM World
+set sub=!str:~5,5!              & REM World
 
 REM String replacement
 set text=Hello World
-set new=!text:World=CMD!        # Hello CMD
-set new=!text: =_!              # Hello_World
+set new=!text:World=CMD!        & REM Hello CMD
+set new=!text: =_!              & REM Hello_World
 
 REM Remove substring
 set path=C:\Users\Docs\file.txt
-set filename=!path:C:\Users\Docs\=!    # file.txt
+set filename=!path:C:\Users\Docs\=!    & REM file.txt
 
 REM Extract filename and extension
 for %%F in ("%path%") do (
-    set filename=%%~nF          # file
-    set extension=%%~xF         # .txt
-    set fullname=%%~nxF         # file.txt
-    set drive=%%~dF             # C:
-    set folder=%%~pF            # \Users\Docs\
-    set fullpath=%%~fF          # Full path
+    set filename=%%~nF          & REM file
+    set extension=%%~xF         & REM .txt
+    set fullname=%%~nxF         & REM file.txt
+    set drive=%%~dF             & REM C:
+    set folder=%%~pF            & REM \Users\Docs\
+    set fullpath=%%~fF          & REM Full path
 )
 
 REM String length
@@ -130,6 +130,7 @@ if exist %1 (
 setlocal enabledelayedexpansion
 
 REM Setup logging
+REM Note: Date format is locale-dependent (US format assumed)
 set LOGFILE=script_%date:~-4%-%date:~-10,2%-%date:~-7,2%.log
 call :log "Script started"
 
