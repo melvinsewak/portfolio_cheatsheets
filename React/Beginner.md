@@ -25,7 +25,7 @@ const content = (
 );
 
 // Using fragments to avoid extra DOM nodes
-const content = (
+const contentWithFragment = (
     <>
         <h1>Title</h1>
         <p>Paragraph</p>
@@ -61,18 +61,18 @@ const message = <p>{isLoggedIn ? 'Welcome back!' : 'Please log in'}</p>;
 
 ### Basic Component
 ```jsx
-// Simple component
+// Simple function component
 function Welcome() {
     return <h1>Hello, World!</h1>;
 }
 
 // Arrow function component
-const Welcome = () => {
+const WelcomeArrow = () => {
     return <h1>Hello, World!</h1>;
 };
 
 // Implicit return (one-liner)
-const Welcome = () => <h1>Hello, World!</h1>;
+const WelcomeShort = () => <h1>Hello, World!</h1>;
 
 // Component with multiple elements
 function Card() {

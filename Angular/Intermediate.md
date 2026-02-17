@@ -9,6 +9,7 @@ Forms driven by directives in the template.
 ```typescript
 // app.module.ts or component (standalone)
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-user-form',
@@ -375,10 +376,12 @@ export class ResultsComponent implements OnInit {
 
 ### Programmatic Navigation
 ```typescript
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 export class NavigationComponent {
   private router = inject(Router);
+  private location = inject(Location);
   
   goToUser(userId: number) {
     this.router.navigate(['/user', userId]);
@@ -391,7 +394,7 @@ export class NavigationComponent {
   }
   
   goBack() {
-    this.router.navigate(['..'], { relativeTo: this.route });
+    this.location.back();
   }
   
   replaceUrl() {
@@ -548,6 +551,7 @@ import { HttpHeaders, HttpParams } from '@angular/common/http';
 })
 export class ApiService {
   private http = inject(HttpClient);
+  private apiUrl = 'https://api.example.com';
   
   // With custom headers
   getUsersWithAuth(): Observable<User[]> {
@@ -601,10 +605,10 @@ export class DataService {
     );
   }
   
-  // filter - Filter items
+  // filter - Filter items in array
   getActiveUsers(): Observable<User[]> {
     return this.http.get<User[]>('/api/users').pipe(
-      filter(users => users.every(user => user.active))
+      map(users => users.filter(user => user.active))
     );
   }
   
@@ -620,7 +624,7 @@ export class DataService {
 
 ### Error Handling Operators
 ```typescript
-import { catchError, retry, throwError } from 'rxjs';
+import { catchError, retry, throwError, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -650,7 +654,7 @@ export class UserService {
 ### Combination Operators
 ```typescript
 import { forkJoin, combineLatest, merge } from 'rxjs';
-import { switchMap, mergeMap } from 'rxjs/operators';
+import { switchMap, mergeMap, debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -695,7 +699,9 @@ export class DataService {
 
 ### Common RxJS Patterns
 ```typescript
-import { Subject, BehaviorSubject, debounceTime, distinctUntilChanged } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap, takeUntil } from 'rxjs/operators';
 
 export class SearchComponent implements OnInit, OnDestroy {
   private searchSubject = new Subject<string>();

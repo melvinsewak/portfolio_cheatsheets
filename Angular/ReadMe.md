@@ -4,7 +4,7 @@ Welcome to the Angular cheatsheet! This guide will help you quickly get up to sp
 
 ## Overview
 
-Angular is a comprehensive TypeScript-based web application framework developed and maintained by Google. It provides a complete solution for building scalable single-page applications with a powerful set of tools including routing, forms, HTTP client, and more. Angular follows the MVC (Model-View-Controller) architectural pattern and emphasizes testability, maintainability, and reusability.
+Angular is a comprehensive TypeScript-based web application framework developed and maintained by Google. It provides a complete solution for building scalable single-page applications with a powerful set of tools including routing, forms, HTTP client, and more. Angular uses a component-based architecture (often compared to MVVM-style patterns) and emphasizes testability, maintainability, and reusability.
 
 ## Contents
 

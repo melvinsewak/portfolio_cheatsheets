@@ -71,6 +71,10 @@ function calculateArea(shape: Shape): number {
             return shape.width * shape.height;
         case "triangle":
             return (shape.base * shape.height) / 2;
+        default: {
+            const _exhaustiveCheck: never = shape;
+            throw new Error(`Unhandled shape kind: ${JSON.stringify(_exhaustiveCheck)}`);
+        }
     }
 }
 ```
@@ -83,22 +87,22 @@ type IsString<T> = T extends string ? true : false;
 type A = IsString<string>;   // true
 type B = IsString<number>;   // false
 
-// Practical example
-type NonNullable<T> = T extends null | undefined ? never : T;
+// Practical example - Custom NonNullable implementation
+type MyNonNullable<T> = T extends null | undefined ? never : T;
 
-type C = NonNullable<string | null>;  // string
-type D = NonNullable<number | undefined>;  // number
+type C = MyNonNullable<string | null>;  // string
+type D = MyNonNullable<number | undefined>;  // number
 ```
 
 ### Mapped Types
 ```typescript
-// Make all properties optional
-type Partial<T> = {
+// Custom Partial implementation (for demonstration)
+type MyPartial<T> = {
     [P in keyof T]?: T[P];
 };
 
-// Make all properties readonly
-type Readonly<T> = {
+// Custom Readonly implementation (for demonstration)
+type MyReadonly<T> = {
     readonly [P in keyof T]: T[P];
 };
 
