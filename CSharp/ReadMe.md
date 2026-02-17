@@ -36,7 +36,7 @@ namespace MyApp
 
 - **Strongly Typed**: Type safety at compile time
 - **Object-Oriented**: Full OOP support with classes, interfaces, and inheritance
-- **Cross-Platform**: Run on Windows, Linux, and macOS with .NET Core/.NET 5+
+- **Cross-Platform**: Run on Windows, Linux, and macOS with .NET 6+ (Long-Term Support)
 - **Garbage Collection**: Automatic memory management
 - **Rich Standard Library**: Extensive built-in functionality
 
