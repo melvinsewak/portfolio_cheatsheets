@@ -353,9 +353,16 @@ docker run -d \
 ### What is Docker Compose?
 Tool for defining and running multi-container Docker applications using YAML files.
 
+> **Modern Note**: Docker Compose v2 is now integrated into the Docker CLI as `docker compose` (not `docker-compose`). The `version` field in YAML files is optional in v2+.
+
 ### Installation
 ```bash
-# Install Docker Compose (Linux)
+# Docker Compose v2 is included with Docker Desktop
+# For Linux, install Docker Compose plugin:
+sudo apt-get update
+sudo apt-get install docker-compose-plugin
+
+# Or install standalone (older method)
 sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
@@ -364,6 +371,8 @@ docker compose version
 ```
 
 ### Basic docker-compose.yml
+
+> **Note**: The `version` field is optional in Docker Compose v2+. It's included here for compatibility with older versions.
 
 ```yaml
 version: '3.8'
