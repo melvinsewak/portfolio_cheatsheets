@@ -50,6 +50,43 @@ A comprehensive TypeScript-based framework for building scalable web application
 - [Intermediate](./Angular/Intermediate.md) - Forms, routing, HTTP client, and RxJS
 - [Advanced](./Angular/Advanced.md) - State management, change detection, and performance
 
+### Command-Line Tools
+
+#### [Linux](./Linux)
+Essential Linux command-line tools for system administration, file management, and automation.
+
+- [Beginner](./Linux/Beginner.md) - Navigation, file operations, permissions, and basic text processing
+- [Intermediate](./Linux/Intermediate.md) - Process management, networking, archives, and system monitoring
+- [Advanced](./Linux/Advanced.md) - Shell scripting, sed/awk, package management, and performance tuning
+
+#### [Git & GitHub](./GitHub)
+Version control and collaboration tools for modern software development.
+
+- [Beginner](./GitHub/Beginner.md) - Basic Git workflow, commits, branches, and GitHub basics
+- [Intermediate](./GitHub/Intermediate.md) - Merging, stashing, pull requests, and collaboration workflows
+- [Advanced](./GitHub/Advanced.md) - Rebasing, cherry-picking, hooks, and GitHub Actions
+
+#### [Windows CMD](./WindowsCMD)
+Windows Command Prompt commands for system administration and automation on Windows.
+
+- [Beginner](./WindowsCMD/Beginner.md) - Navigation, file operations, and basic commands
+- [Intermediate](./WindowsCMD/Intermediate.md) - Batch scripting, networking, and process management
+- [Advanced](./WindowsCMD/Advanced.md) - Advanced scripting, scheduled tasks, and system configuration
+
+#### [Docker](./Docker)
+Container platform for building, shipping, and running applications in isolated environments.
+
+- [Beginner](./Docker/Beginner.md) - Images, containers, Dockerfile basics, and volumes
+- [Intermediate](./Docker/Intermediate.md) - Networking, Docker Compose, and multi-container apps
+- [Advanced](./Docker/Advanced.md) - Multi-stage builds, security, optimization, and Docker Swarm
+
+#### [Kubernetes](./Kubernetes)
+Container orchestration platform for automating deployment, scaling, and management of containerized applications.
+
+- [Beginner](./Kubernetes/Beginner.md) - Pods, Deployments, Services, and kubectl basics
+- [Intermediate](./Kubernetes/Intermediate.md) - ConfigMaps, Secrets, Volumes, Ingress, and health checks
+- [Advanced](./Kubernetes/Advanced.md) - StatefulSets, RBAC, Helm, monitoring, and troubleshooting
+
 ## 🎯 How to Use This Repository
 
 1. **Choose Your Topic**: Select the language or framework you want to learn or reference
