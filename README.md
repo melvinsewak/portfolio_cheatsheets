@@ -6,6 +6,13 @@ Welcome to the Portfolio Cheatsheets repository! This is a comprehensive collect
 
 ### Programming Languages
 
+#### [Python](./Python)
+A versatile, high-level programming language renowned for its readability and rich ecosystem, powering everything from web development to AI/ML and automation.
+
+- [Beginner](./Python/Beginner.md) - Data types, variables, control flow, functions, lists, dicts, sets, and I/O
+- [Intermediate](./Python/Intermediate.md) - OOP, comprehensions, file I/O, error handling, decorators, and generators
+- [Advanced](./Python/Advanced.md) - Async/await, concurrency, type hints, metaclasses, testing, and performance optimization
+
 #### [C#](./CSharp)
 A modern, object-oriented programming language by Microsoft, perfect for building Windows applications, web apps with ASP.NET, and games with Unity.
 
@@ -56,6 +63,20 @@ A comprehensive TypeScript-based framework for building scalable web application
 - [Beginner](./Angular/Beginner.md) - Components, templates, directives, and services
 - [Intermediate](./Angular/Intermediate.md) - Forms, routing, HTTP client, and RxJS
 - [Advanced](./Angular/Advanced.md) - State management, change detection, and performance
+
+#### [LangChain](./Langchain)
+A leading Python framework for building applications powered by large language models (LLMs), with support for RAG, agents, chains, and multi-model integrations.
+
+- [Beginner](./Langchain/Beginner.md) - Installation, LLMs, prompts, output parsers, and simple chains
+- [Intermediate](./Langchain/Intermediate.md) - RAG, vector stores, agents, tools, memory, and streaming
+- [Advanced](./Langchain/Advanced.md) - LangGraph, custom runnables, multi-agent systems, callbacks, and production patterns
+
+#### [Microsoft AutoGen](./MicrosoftAgentFramework)
+Microsoft's open-source framework for building multi-agent AI systems where specialized agents collaborate, use tools, and execute code to solve complex tasks.
+
+- [Beginner](./MicrosoftAgentFramework/Beginner.md) - Installation, AssistantAgent, tools, termination conditions, and basic conversations
+- [Intermediate](./MicrosoftAgentFramework/Intermediate.md) - Multi-agent teams, code execution, human-in-the-loop, and event-driven patterns
+- [Advanced](./MicrosoftAgentFramework/Advanced.md) - Custom agents, GraphFlow, observability, production deployment, and testing
 
 ### Command-Line Tools
 
