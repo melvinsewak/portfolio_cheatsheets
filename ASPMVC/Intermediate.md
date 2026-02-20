@@ -576,6 +576,7 @@ public class AppSettings
 }
 
 // Injecting in a controller
+// Requires: using Microsoft.Extensions.Options;
 public class HomeController : Controller
 {
     private readonly AppSettings _settings;

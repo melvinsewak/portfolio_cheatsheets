@@ -9,8 +9,8 @@ ASP.NET Core MVC is a rich framework for building web applications and APIs usin
 ## Contents
 
 - [Beginner.md](Beginner.md) - Project setup, controllers, views, Razor syntax, models, and routing
-- [Intermediate.md](Intermediate.md) - Entity Framework Core, validation, ViewModels, authentication, dependency injection, and Tag Helpers
-- [Advanced.md](Advanced.md) - Web API, middleware, filters, SignalR, testing, and performance optimization
+- [Intermediate.md](Intermediate.md) - Entity Framework Core, validation, ViewModels, authentication, and dependency injection
+- [Advanced.md](Advanced.md) - Web API, middleware, filters, testing, performance optimization, and security
 
 ## Quick Reference
 

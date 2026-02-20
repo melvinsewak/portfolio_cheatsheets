@@ -53,6 +53,10 @@ public class ProductsApiController : ControllerBase
         if (id != product.Id)
             return BadRequest();
 
+        var existingProduct = await _repository.GetByIdAsync(id);
+        if (existingProduct == null)
+            return NotFound();
+
         await _repository.UpdateAsync(product);
         return NoContent();
     }
@@ -483,6 +487,11 @@ public class ProductsControllerTests
 
 ### Integration Testing with WebApplicationFactory
 ```csharp
+// Note: In .NET 6+ with the minimal hosting model, Program.cs must be accessible to the test project.
+// Add the following to the bottom of Program.cs in your MVC project:
+//   public partial class Program { }
+// Or add [assembly: InternalsVisibleTo("MyMvcApp.Tests")] to expose internals.
+
 using Microsoft.AspNetCore.Mvc.Testing;
 
 public class HomeControllerIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
@@ -585,9 +594,9 @@ builder.Services.AddControllersWithViews(options =>
 
 ### Content Security Policy (CSP)
 ```csharp
+// Requires: using System.Security.Cryptography;
 // Note: for script-src nonces, generate a unique random value per request
 // and include the same nonce in the script tags of your views.
-// The placeholder below shows the nonce pattern; replace it with dynamic generation.
 app.Use(async (context, next) =>
 {
     // Generate a unique nonce per request for inline scripts
