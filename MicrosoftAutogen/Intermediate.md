@@ -212,8 +212,14 @@ asyncio.run(notebook_analysis())
 
 ### Tools with Complex Return Types
 ```python
+import asyncio
+from autogen_agentchat.agents import AssistantAgent
+from autogen_agentchat.ui import Console
 from autogen_core.tools import FunctionTool
+from autogen_ext.models.openai import OpenAIChatCompletionClient
 from pydantic import BaseModel
+
+model_client = OpenAIChatCompletionClient(model="gpt-4o-mini")
 
 class WeatherData(BaseModel):
     city: str
@@ -432,6 +438,8 @@ automated_human = AutomatedUserProxy(
 
 ### Processing Agent Events
 ```python
+import asyncio
+from autogen_agentchat.agents import AssistantAgent
 from autogen_agentchat.messages import (
     TextMessage,
     ToolCallRequestEvent,
@@ -439,6 +447,12 @@ from autogen_agentchat.messages import (
     ThoughtEvent,
 )
 from autogen_agentchat.base import TaskResult
+from autogen_core.tools import FunctionTool
+from autogen_ext.models.openai import OpenAIChatCompletionClient
+
+model_client = OpenAIChatCompletionClient(model="gpt-4o-mini")
+
+# Assume weather_tool and wiki_tool are defined as shown in the Tools section above
 
 async def handle_events(task: str) -> None:
     agent = AssistantAgent(
@@ -470,6 +484,9 @@ asyncio.run(handle_events("Search Wikipedia for quantum computing and check the 
 ```python
 import asyncio
 from autogen_agentchat.agents import AssistantAgent
+from autogen_ext.models.openai import OpenAIChatCompletionClient
+
+model_client = OpenAIChatCompletionClient(model="gpt-4o-mini")
 
 async def run_agents_in_parallel():
     """Run multiple independent agents concurrently."""

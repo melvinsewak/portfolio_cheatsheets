@@ -64,19 +64,26 @@ A comprehensive TypeScript-based framework for building scalable web application
 - [Intermediate](./Angular/Intermediate.md) - Forms, routing, HTTP client, and RxJS
 - [Advanced](./Angular/Advanced.md) - State management, change detection, and performance
 
-#### [LangChain](./Langchain)
+#### [LangChain](./LangChain)
 A leading Python framework for building applications powered by large language models (LLMs), with support for RAG, agents, chains, and multi-model integrations.
 
-- [Beginner](./Langchain/Beginner.md) - Installation, LLMs, prompts, output parsers, and simple chains
-- [Intermediate](./Langchain/Intermediate.md) - RAG, vector stores, agents, tools, memory, and streaming
-- [Advanced](./Langchain/Advanced.md) - LangGraph, custom runnables, multi-agent systems, callbacks, and production patterns
+- [Beginner](./LangChain/Beginner.md) - Installation, LLMs, prompts, output parsers, and simple chains
+- [Intermediate](./LangChain/Intermediate.md) - RAG, vector stores, agents, tools, memory, and streaming
+- [Advanced](./LangChain/Advanced.md) - LangGraph, custom runnables, multi-agent systems, callbacks, and production patterns
 
-#### [Microsoft AutoGen](./MicrosoftAgentFramework)
-Microsoft's open-source framework for building multi-agent AI systems where specialized agents collaborate, use tools, and execute code to solve complex tasks.
+#### [Microsoft AutoGen](./MicrosoftAutogen)
+Microsoft's open-source Python framework for building multi-agent AI systems where specialized agents collaborate, use tools, and execute code to solve complex tasks.
 
-- [Beginner](./MicrosoftAgentFramework/Beginner.md) - Installation, AssistantAgent, tools, termination conditions, and basic conversations
-- [Intermediate](./MicrosoftAgentFramework/Intermediate.md) - Multi-agent teams, code execution, human-in-the-loop, and event-driven patterns
-- [Advanced](./MicrosoftAgentFramework/Advanced.md) - Custom agents, GraphFlow, observability, production deployment, and testing
+- [Beginner](./MicrosoftAutogen/Beginner.md) - Installation, AssistantAgent, tools, termination conditions, and basic conversations
+- [Intermediate](./MicrosoftAutogen/Intermediate.md) - Multi-agent teams, code execution, human-in-the-loop, and event-driven patterns
+- [Advanced](./MicrosoftAutogen/Advanced.md) - Custom agents, GraphFlow, observability, production deployment, and testing
+
+#### [Microsoft Agent Framework (.NET)](./MicrosoftAgent)
+Microsoft's unified .NET SDK (Preview) for building, orchestrating, and deploying AI agents and multi-agent workflows in C#, with native integration with Azure OpenAI, MCP, and Microsoft.Extensions.AI.
+
+- [Beginner](./MicrosoftAgent/Beginner.md) - Installation, first agent, streaming, tools, and multi-turn conversations
+- [Intermediate](./MicrosoftAgent/Intermediate.md) - Multi-agent workflows, memory, human-in-the-loop, and dependency injection
+- [Advanced](./MicrosoftAgent/Advanced.md) - Custom agents, graph workflows, MCP integration, OpenTelemetry, and production patterns
 
 ### Command-Line Tools
 

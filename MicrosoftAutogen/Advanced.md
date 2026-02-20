@@ -17,10 +17,10 @@ from autogen_agentchat.messages import (
 from autogen_core import CancellationToken
 
 class SentimentAnalysisAgent(BaseChatAgent):
-    """Custom agent that analyses sentiment without calling an LLM."""
+    """Custom agent that analyzes sentiment without calling an LLM."""
 
     def __init__(self, name: str) -> None:
-        super().__init__(name=name, description="Analyses sentiment of text messages.")
+        super().__init__(name=name, description="Analyzes sentiment of text messages.")
         self._history: list[BaseChatMessage] = []
 
     @property
@@ -186,6 +186,7 @@ asyncio.run(magentic_one_example())
 from autogen_agentchat.teams import DiGraphBuilder, GraphFlow
 from autogen_agentchat.agents import AssistantAgent
 from autogen_agentchat.conditions import MaxMessageTermination
+from autogen_agentchat.ui import Console
 
 async def pipeline_team():
     client = OpenAIChatCompletionClient(model="gpt-4o-mini")

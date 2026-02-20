@@ -105,6 +105,7 @@ from langgraph.graph import StateGraph, END
 from typing import TypedDict, Literal
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
+from pydantic import BaseModel
 
 llm = ChatOpenAI(model="gpt-4o")
 
@@ -162,7 +163,9 @@ graph = builder.compile()
 
 ### Custom LCEL Runnable
 ```python
-from langchain_core.runnables import Runnable, RunnableConfig
+from langchain_core.runnables import Runnable, RunnableConfig, RunnableLambda
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import JsonOutputParser
 from typing import Any, Iterator, AsyncIterator
 
 class SentimentScorer(Runnable):
@@ -200,6 +203,8 @@ pipeline = RunnableLambda(str.strip) | scorer
 ```python
 from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
 
 primary_llm = ChatOpenAI(model="gpt-4o")
 fallback_llm = ChatAnthropic(model="claude-3-5-haiku-20241022")
@@ -207,6 +212,7 @@ fallback_llm = ChatAnthropic(model="claude-3-5-haiku-20241022")
 # Automatically falls back if primary fails
 robust_llm = primary_llm.with_fallbacks([fallback_llm])
 
+prompt = ChatPromptTemplate.from_template("Answer the question: {question}")
 chain = prompt | robust_llm | StrOutputParser()
 result = chain.invoke({"question": "What is AI?"})   # uses fallback if OpenAI is down
 ```
@@ -214,7 +220,16 @@ result = chain.invoke({"question": "What is AI?"})   # uses fallback if OpenAI i
 ### Runnable with Retry
 ```python
 from langchain_core.runnables import RunnableRetry
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_openai import ChatOpenAI
+from langchain_core.output_parsers import StrOutputParser
 
+# Define a simple runnable chain
+prompt = ChatPromptTemplate.from_template("Answer the question: {question}")
+llm = ChatOpenAI(model="gpt-4o-mini")
+chain = prompt | llm | StrOutputParser()
+
+# Wrap the chain with retry logic
 retry_chain = chain.with_retry(
     retry_if_exception_type=(ValueError, TimeoutError),
     wait_exponential_jitter=True,
