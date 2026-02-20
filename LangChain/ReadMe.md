@@ -83,6 +83,14 @@ export LANGCHAIN_TRACING_V2=true     # Enable LangSmith tracing
 export LANGCHAIN_API_KEY="ls__..."
 ```
 
+#### Azure OpenAI Service
+```bash
+# Azure OpenAI requires different environment variables
+export AZURE_OPENAI_API_KEY="..."
+export AZURE_OPENAI_ENDPOINT="https://<your-resource-name>.openai.azure.com/"
+export OPENAI_API_VERSION="2024-12-01-preview"   # use the API version that matches your deployment
+```
+
 ```python
 from dotenv import load_dotenv
 load_dotenv()   # loads .env file automatically
@@ -90,13 +98,19 @@ load_dotenv()   # loads .env file automatically
 
 ### Supported LLM Providers
 ```python
-from langchain_openai import ChatOpenAI, OpenAI
+from langchain_openai import ChatOpenAI, AzureChatOpenAI
 from langchain_anthropic import ChatAnthropic
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_ollama import ChatOllama   # local models
 
 # OpenAI Chat
 llm = ChatOpenAI(model="gpt-4o", temperature=0.7)
+
+# Azure OpenAI Service (reads AZURE_OPENAI_API_KEY, AZURE_OPENAI_ENDPOINT,
+# and OPENAI_API_VERSION from the environment)
+llm = AzureChatOpenAI(
+    azure_deployment="gpt-4o",   # your Azure deployment name
+)
 
 # Anthropic Claude
 llm = ChatAnthropic(model="claude-3-5-sonnet-20241022")
