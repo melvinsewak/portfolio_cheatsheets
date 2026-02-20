@@ -524,6 +524,186 @@ public class HomeControllerIntegrationTests : IClassFixture<WebApplicationFactor
 }
 ```
 
+## SignalR
+
+SignalR is an ASP.NET Core library that simplifies adding real-time web functionality — the server can push content to connected clients instantly without the client polling.
+
+### Installing SignalR
+```bash
+dotnet add package Microsoft.AspNetCore.SignalR
+```
+
+Client-side (npm or CDN):
+```bash
+npm install @microsoft/signalr
+```
+
+```html
+@* Or via CDN in your layout *@
+<script src="https://cdn.jsdelivr.net/npm/@microsoft/signalr/dist/browser/signalr.min.js"></script>
+```
+
+### Creating a Hub
+A Hub is the central class that handles client-server communication.
+
+```csharp
+using Microsoft.AspNetCore.SignalR;
+
+// Hubs/ChatHub.cs
+public class ChatHub : Hub
+{
+    // Called by a client; broadcasts to all connected clients
+    public async Task SendMessage(string user, string message)
+    {
+        await Clients.All.SendAsync("ReceiveMessage", user, message);
+    }
+
+    // Send only to the caller
+    public async Task SendPrivate(string message)
+    {
+        await Clients.Caller.SendAsync("ReceiveMessage", "Server", message);
+    }
+
+    // Send to everyone except the caller
+    public async Task Broadcast(string message)
+    {
+        await Clients.Others.SendAsync("ReceiveMessage", "Server", message);
+    }
+
+    // Lifecycle: called when a client connects
+    public override async Task OnConnectedAsync()
+    {
+        await Clients.All.SendAsync("UserConnected", Context.ConnectionId);
+        await base.OnConnectedAsync();
+    }
+
+    // Lifecycle: called when a client disconnects
+    public override async Task OnDisconnectedAsync(Exception? exception)
+    {
+        await Clients.All.SendAsync("UserDisconnected", Context.ConnectionId);
+        await base.OnDisconnectedAsync(exception);
+    }
+}
+```
+
+### Registering SignalR in Program.cs
+```csharp
+builder.Services.AddSignalR();
+
+// ...
+
+// Map the hub at a specific route
+app.MapHub<ChatHub>("/chathub");
+```
+
+### Groups
+Groups allow sending messages to a subset of connected clients.
+
+```csharp
+public class ChatHub : Hub
+{
+    // Add the caller to a named group
+    public async Task JoinRoom(string roomName)
+    {
+        await Groups.AddToGroupAsync(Context.ConnectionId, roomName);
+        await Clients.Group(roomName).SendAsync("ReceiveMessage", "System", $"{Context.ConnectionId} joined {roomName}");
+    }
+
+    // Remove the caller from a group
+    public async Task LeaveRoom(string roomName)
+    {
+        await Groups.RemoveFromGroupAsync(Context.ConnectionId, roomName);
+        await Clients.Group(roomName).SendAsync("ReceiveMessage", "System", $"{Context.ConnectionId} left {roomName}");
+    }
+
+    // Send to a specific group
+    public async Task SendToRoom(string roomName, string message)
+    {
+        await Clients.Group(roomName).SendAsync("ReceiveMessage", Context.User?.Identity?.Name ?? "Anonymous", message);
+    }
+}
+```
+
+### Pushing Messages from Outside a Hub
+Inject `IHubContext<T>` into a controller or service to send messages without a client calling a hub method.
+
+```csharp
+using Microsoft.AspNetCore.SignalR;
+
+public class OrdersController : Controller
+{
+    private readonly IHubContext<ChatHub> _hubContext;
+
+    public OrdersController(IHubContext<ChatHub> hubContext)
+    {
+        _hubContext = hubContext;
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> PlaceOrder(Order order)
+    {
+        // Process order...
+        await _hubContext.Clients.All.SendAsync("OrderPlaced", order.Id, order.Total);
+        return Ok();
+    }
+}
+```
+
+### Client-Side JavaScript
+```javascript
+// Connect to the hub
+// The URL "/chathub" must match the route registered with app.MapHub<ChatHub>("/chathub") in Program.cs
+const connection = new signalR.HubConnectionBuilder()
+    .withUrl("/chathub")
+    .withAutomaticReconnect()   // Reconnect on dropped connections
+    .build();
+
+// Register a handler for messages pushed from the server
+connection.on("ReceiveMessage", (user, message) => {
+    const li = document.createElement("li");
+    li.textContent = `${user}: ${message}`;
+    document.getElementById("messageList").appendChild(li);
+});
+
+// Start the connection
+connection.start()
+    .then(() => console.log("SignalR connected"))
+    .catch(err => console.error("SignalR error:", err));
+
+// Call a hub method from the client
+document.getElementById("sendButton").addEventListener("click", () => {
+    const user = document.getElementById("userInput").value;
+    const message = document.getElementById("messageInput").value;
+
+    connection.invoke("SendMessage", user, message)
+        .catch(err => console.error(err));
+});
+
+// Handle disconnection
+connection.onclose(async () => {
+    console.warn("SignalR disconnected");
+});
+```
+
+### Securing a Hub
+```csharp
+// Require authentication for the entire hub
+[Authorize]
+public class ChatHub : Hub
+{
+    public async Task SendMessage(string message)
+    {
+        // Access the authenticated user
+        var userName = Context.User?.Identity?.Name ?? "Anonymous";
+        await Clients.All.SendAsync("ReceiveMessage", userName, message);
+    }
+}
+
+// Apply a policy
+[Authorize(Policy = "AdminOnly")]
+public class AdminHub : Hub { }
+```
+
 ## Performance Optimization
 
 ### Async Throughout

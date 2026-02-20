@@ -451,6 +451,94 @@ Tag Helpers replace HTML helper methods and look like standard HTML attributes.
 </select>
 ```
 
+### Image Tag Helper
+Appends a version query string to image URLs so browsers load the updated file after a change.
+```html
+@* Generates: <img src="/images/logo.png?v=xyz123" alt="Logo"> *@
+<img asp-append-version="true" src="~/images/logo.png" alt="Logo" />
+```
+
+### Link and Script Tag Helpers
+Serve a local fallback if a CDN resource fails to load.
+```html
+<head>
+    @* asp-append-version adds a cache-busting hash *@
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    @* CDN with local fallback *@
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+          asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+          asp-fallback-test-class="sr-only"
+          asp-fallback-test-property="position"
+          asp-fallback-test-value="absolute" />
+</head>
+
+<body>
+    @* asp-append-version on scripts *@
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @* CDN with local fallback *@
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+            asp-fallback-test="window.bootstrap">
+    </script>
+</body>
+```
+
+### Environment Tag Helper
+Renders content based on the current hosting environment (`Development`, `Staging`, `Production`).
+```html
+@* Render only in Development *@
+<environment include="Development">
+    <link rel="stylesheet" href="~/css/site.css" />
+</environment>
+
+@* Render in Staging and Production *@
+<environment exclude="Development">
+    <link rel="stylesheet"
+          href="https://cdn.example.com/css/site.min.css"
+          asp-fallback-href="~/css/site.min.css"
+          asp-fallback-test-class="sr-only"
+          asp-fallback-test-property="position"
+          asp-fallback-test-value="absolute" />
+</environment>
+```
+
+### Custom Tag Helper
+Create your own Tag Helpers to encapsulate reusable HTML components.
+```csharp
+// TagHelpers/AlertTagHelper.cs
+using Microsoft.AspNetCore.Razor.TagHelpers;
+
+// Matches <alert type="success">...</alert>
+[HtmlTargetElement("alert")]
+public class AlertTagHelper : TagHelper
+{
+    // Maps to the "type" attribute: success, danger, warning, info
+    public string Type { get; set; } = "info";
+
+    public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
+    {
+        output.TagName = "div";
+        output.Attributes.SetAttribute("class", $"alert alert-{Type} alert-dismissible");
+        output.Attributes.SetAttribute("role", "alert");
+
+        var content = await output.GetChildContentAsync();
+        output.Content.SetHtmlContent(content.GetContent());
+    }
+}
+```
+
+```html
+@* Register in _ViewImports.cshtml *@
+@addTagHelper *, MyMvcApp
+
+@* Use in a view *@
+<alert type="success">Product saved successfully!</alert>
+<alert type="danger">An error occurred.</alert>
+```
+
 ## Layouts and Partial Views
 
 ### Layout File (_Layout.cshtml)
