@@ -133,7 +133,6 @@ function errorHandler(err, req, res, next) {
 }
 
 // Must be registered after all routes
-app.use(errorHandler);
 
 // Triggering the error handler
 app.get("/risky", (req, res, next) => {
@@ -143,6 +142,9 @@ app.get("/risky", (req, res, next) => {
         next(err);  // Passes error to error handler
     }
 });
+
+// Error handler must come after all routes
+app.use(errorHandler);
 ```
 
 ### Common Middleware Packages
@@ -191,10 +193,18 @@ readUserFile(42)
 ### Async/Await
 ```javascript
 const fs = require("fs").promises;
+const path = require("path");
+
+const USERS_DIR = path.join(__dirname, "users");
 
 async function readUserFile(userId) {
+    // Validate userId to prevent path traversal (adjust pattern to match your ID format)
+    if (!/^[a-zA-Z0-9_-]+$/.test(String(userId))) {
+        throw new Error("Invalid user ID");
+    }
     try {
-        const data = await fs.readFile(`users/${userId}.json`, "utf8");
+        const filePath = path.join(USERS_DIR, `${userId}.json`);
+        const data = await fs.readFile(filePath, "utf8");
         return JSON.parse(data);
     } catch (err) {
         throw new Error(`User ${userId} not found`);
@@ -225,24 +235,33 @@ app.get("/users/:id", async (req, res, next) => {
 
 ### Promise Utilities
 ```javascript
-// Run all in parallel, fail if any fail
-const results = await Promise.all([p1, p2, p3]);
+// Replace p1, p2, p3 with actual promises in your code
+// const p1 = fetchUser(1);
+// const p2 = fetchPosts(1);
+// const p3 = fetchComments(1);
 
-// Run all in parallel, get results even if some fail
-const results = await Promise.allSettled([p1, p2, p3]);
-results.forEach(result => {
-    if (result.status === "fulfilled") {
-        console.log(result.value);
-    } else {
-        console.error(result.reason);
-    }
+(async () => {
+    // Run all in parallel, fail if any fail
+    const allResults = await Promise.all([p1, p2, p3]);
+
+    // Run all in parallel, get results even if some fail
+    const settledResults = await Promise.allSettled([p1, p2, p3]);
+    settledResults.forEach(result => {
+        if (result.status === "fulfilled") {
+            console.log(result.value);
+        } else {
+            console.error(result.reason);
+        }
+    });
+
+    // Return first resolved/rejected
+    const fastest = await Promise.race([p1, p2, p3]);
+
+    // Return first fulfilled (ignores rejections)
+    const first = await Promise.any([p1, p2, p3]);
+})().catch(err => {
+    console.error("Error in Promise utilities example:", err);
 });
-
-// Return first resolved/rejected
-const fastest = await Promise.race([p1, p2, p3]);
-
-// Return first fulfilled (ignores rejections)
-const first = await Promise.any([p1, p2, p3]);
 ```
 
 ## Working with Databases
@@ -273,19 +292,24 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model("User", userSchema);
 
 // CRUD Operations
-// Create
-const user = await User.create({ name: "Alice", email: "alice@example.com" });
+async function runCrudExamples() {
+    // Create
+    const createdUser = await User.create({ name: "Alice", email: "alice@example.com" });
+    const id = createdUser._id;
 
-// Read
-const users = await User.find();
-const user = await User.findById(id);
-const alice = await User.findOne({ name: "Alice" });
+    // Read
+    const users = await User.find();
+    const userById = await User.findById(id);
+    const alice = await User.findOne({ name: "Alice" });
 
-// Update
-const updated = await User.findByIdAndUpdate(id, { age: 26 }, { new: true });
+    // Update
+    const updated = await User.findByIdAndUpdate(id, { age: 26 }, { new: true });
 
-// Delete
-await User.findByIdAndDelete(id);
+    // Delete
+    await User.findByIdAndDelete(id);
+}
+
+runCrudExamples().catch(err => console.error("CRUD example failed:", err));
 ```
 
 ### SQLite/PostgreSQL with pg (PostgreSQL)

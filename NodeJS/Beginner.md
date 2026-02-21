@@ -133,11 +133,11 @@ try {
 }
 
 // Promise-based (modern approach)
-const fs = require("fs").promises;
+const fsPromises = require("fs").promises;
 
 async function readFile() {
     try {
-        const data = await fs.readFile("data.txt", "utf8");
+        const data = await fsPromises.readFile("data.txt", "utf8");
         console.log(data);
     } catch (err) {
         console.error("Error:", err);
@@ -438,6 +438,10 @@ const dbUrl = "mongodb://localhost:27017/mydb";
 
 ❌ **Don't block the event loop with synchronous code**
 ```javascript
+const express = require("express");
+const fs = require("fs");
+const app = express();
+
 // Bad - blocks other requests
 app.get("/data", (req, res) => {
     const data = fs.readFileSync("large-file.txt");  // Blocks!
@@ -449,6 +453,8 @@ app.get("/data", async (req, res) => {
     const data = await fs.promises.readFile("large-file.txt");
     res.send(data);
 });
+
+app.listen(3000);
 ```
 
 ❌ **Don't commit .env files to version control**

@@ -489,6 +489,10 @@ async function getUserByEmail(email) {
 ```
 
 ### Secure Cookie Configuration
+```bash
+npm install express-session
+```
+
 ```javascript
 const session = require("express-session");
 
@@ -536,11 +540,16 @@ if (process.env.NODE_ENV !== "production") {
 
 // Usage
 logger.info("Server started", { port: 3000 });
-logger.error("Database connection failed", { error: err.message });
-logger.warn("Deprecated endpoint accessed", { path: req.path });
+
+try {
+    // Simulated error
+} catch (err) {
+    logger.error("Database connection failed", { error: err.message });
+}
 
 // Express request logging middleware
 app.use((req, res, next) => {
+    logger.warn("Deprecated endpoint accessed", { path: req.path });
     const start = Date.now();
     res.on("finish", () => {
         logger.info("HTTP Request", {
@@ -559,6 +568,22 @@ app.use((req, res, next) => {
 ### Handling Process Signals
 ```javascript
 const http = require("http");
+const express = require("express");
+const mongoose = require("mongoose");
+const { Pool } = require("pg");
+
+// Minimal Express app for the HTTP server
+const app = express();
+app.get("/", (req, res) => {
+    res.send("Server is running");
+});
+
+// Example PostgreSQL pool (configure as needed for your environment)
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL
+});
+
+// Assume mongoose.connect(...) is called during app startup
 
 const server = http.createServer(app);
 server.listen(3000);
